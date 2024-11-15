@@ -1,3 +1,4 @@
+
 function Header() {
     return (
         <nav className="blue lighten-3">
@@ -8,12 +9,13 @@ function Header() {
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                     <li>
                         <a
-                            href="https://github.com/michey85/react-shop"
+                            href="https://github.com/ISaxAI/react-shop"
                             target="_blank"
                             rel="noreferrer"
                         >
                             Repo
                         </a>
+
                     </li>
                 </ul>
             </div>
