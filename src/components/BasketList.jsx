@@ -1,13 +1,13 @@
 import {BasketItem} from "./BasketItem";
-import {useContext} from "react";
-import {ShopContext} from "../context";
 
 const BasketList = (props) => {
     const {
         order = [],
-        changeBasketShow,
-    } = useContext(ShopContext)
-
+        changeBasketShow = Function.prototype,
+        removeFromBasket = Function.prototype,
+        incrementOrderItem = Function.prototype,
+        decrementOrderItem =Function.prototype
+    } = props
     const totalCost = (order) =>{
         let cost = 0;
         order.forEach(orderItem => {
@@ -26,6 +26,9 @@ const BasketList = (props) => {
         {
             order.length ? order.map(item => (
                     <BasketItem key={item.offerId}
+                                removeFromBasket={removeFromBasket}
+                                incrementOrderItem={incrementOrderItem}
+                                decrementOrderItem={decrementOrderItem}
                                 {...item}
                     />
                 )
