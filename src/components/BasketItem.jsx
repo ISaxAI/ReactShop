@@ -1,13 +1,14 @@
+import {useContext} from "react";
+import {ShopContext} from "../context";
+
 const BasketItem = (props) => {
     const {
         offerId,
         displayName,
         quantity,
         regularPrice,
-        removeFromBasket = Function.prototype,
-        incrementOrderItem = Function.prototype,
-        decrementOrderItem = Function.prototype
     } = props
+    const {removeFromBasket, incrementOrderItem, decrementOrderItem} = useContext(ShopContext)
     return<li className="collection-item">
             {displayName}{' '}
             <i className="material-icons basket-quantity"

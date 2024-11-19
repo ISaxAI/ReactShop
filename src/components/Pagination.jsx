@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {GoodsList} from "./GoodsList";
+import {ShopContext} from "../context";
 
 const Pagination = (props) => {
+    const {itemsPerPage} = props
     const {
         goods,
-        itemsPerPage,
-        addToBasket
-    } = props
+    } = useContext(ShopContext)
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(goods.length / itemsPerPage);
@@ -20,7 +21,7 @@ const Pagination = (props) => {
 
     return (
         <div>
-            <GoodsList goods={currentGoods} addToBasket={addToBasket}/>
+            <GoodsList goods={currentGoods}/>
             <ul className="pagination">
                 <li>
                     <a>
