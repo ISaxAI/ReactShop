@@ -6,9 +6,9 @@ export function reducer(state, {type, payload}) {
                 goods: payload || [],
                 loading: false
             }
-        case  'ADD_TO_BASKET':
+        case 'ADD_TO_BASKET': {
             const itemIndex = state.order.findIndex(
-                (orderItem) => orderItem.offerId === payload.id
+                (orderItem) => orderItem.id === payload.id
             );
 
             let newOrder = null;
@@ -36,6 +36,7 @@ export function reducer(state, {type, payload}) {
                 order: newOrder,
                 alertName: payload.name,
             };
+        }
 
         case 'REMOVE_FROM_BASKET':
             return {
