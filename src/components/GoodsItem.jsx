@@ -1,5 +1,5 @@
-import {useContext} from "react";
-import {ShopContext} from "../context";
+import {useDispatch} from "react-redux";
+import {addToBasket} from "../shopSlice";
 
 function GoodsItem(props) {
     const {
@@ -9,7 +9,7 @@ function GoodsItem(props) {
         price: { regularPrice },
         displayAssets: [{ full_background }],
     } = props;
-    const {addToBasket} = useContext(ShopContext)
+    const dispatch = useDispatch()
     return (
         <div className="card">
             <div className="card-image">
@@ -22,7 +22,16 @@ function GoodsItem(props) {
                 </p>
             </div>
             <div className="card-action">
-                <button className='btn blue lighten-3' onClick={()=>(addToBasket({offerId, displayName, regularPrice}))}>Купить</button>
+                <button className='btn blue lighten-3'
+                        onClick={()=>(
+                            dispatch(addToBasket(
+                                {
+                                    id: offerId ,
+                                    displayName: displayName,
+                                    regularPrice: regularPrice
+                                })
+                            )
+                        )}>Купить</button>
                 <span className='right '>{regularPrice} руб.</span>
             </div>
         </div>)

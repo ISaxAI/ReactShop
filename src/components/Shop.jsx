@@ -5,9 +5,17 @@ import {Cart} from "./Cart";
 import {BasketList} from "./BasketList";
 import Pagination from "./Pagination";
 import {ShopContext} from "../context";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    setGoods
+} from "../shopSlice";
 
 function Shop() {
-    const {goods, loading, setGoods, order, isBasketShow} = useContext(ShopContext)
+    //const {goods, loading, setGoods, order, isBasketShow} = useContext(ShopContext)
+    const order = useSelector(state => state.shop.order)
+    const isBasketShow = useSelector(state => state.shop.isBasketShow)
+    const loading = useSelector(state => state.shop.loading)
+    const dispatch = useDispatch()
 
     useEffect(function getGoods() {
         fetch(API_URL, {
@@ -17,7 +25,7 @@ function Shop() {
         })
             .then(response => response.json())
             .then((data) => {
-                setGoods(data.shop)
+                dispatch(setGoods(data.shop))
             })
     }, []);
 

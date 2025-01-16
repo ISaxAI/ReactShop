@@ -1,5 +1,5 @@
-import {useContext} from "react";
-import {ShopContext} from "../context";
+import {useDispatch} from "react-redux";
+import {decrementOrderItem, incrementOrderItem, removeFromBasket} from "../shopSlice";
 
 const BasketItem = (props) => {
     const {
@@ -8,27 +8,27 @@ const BasketItem = (props) => {
         quantity,
         regularPrice,
     } = props
-    const {removeFromBasket, incrementOrderItem, decrementOrderItem} = useContext(ShopContext)
+    const dispatch = useDispatch()
     return<li className="collection-item">
             {displayName}{' '}
             <i className="material-icons basket-quantity"
-               onClick={()=>{
-                   decrementOrderItem(offerId)
-               }}
+               onClick={()=>
+                   dispatch(decrementOrderItem({ id: offerId }))
+               }
             >
                 remove
             </i>{' '}
             x{quantity}{' '}
             <i
                 className="material-icons basket-quantity"
-                onClick={()=>{
-                    incrementOrderItem(offerId)
-                }}
+                onClick={()=>
+                    dispatch(incrementOrderItem({ id: offerId }))
+                }
             >
                 add
             </i>{' '}
             = {regularPrice * quantity}руб.
-            <span className="secondary-content" onClick={() => removeFromBasket(offerId)}>
+            <span className="secondary-content" onClick={() => dispatch(removeFromBasket({ id: offerId }))}>
             <i className='material-icons '>
                 close
             </i>

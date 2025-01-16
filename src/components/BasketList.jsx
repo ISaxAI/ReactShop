@@ -1,13 +1,12 @@
 import {BasketItem} from "./BasketItem";
 import {useContext} from "react";
 import {ShopContext} from "../context";
+import {useDispatch, useSelector} from "react-redux";
+import {changeBasketShow} from "../shopSlice";
 
 const BasketList = (props) => {
-    const {
-        order = [],
-        changeBasketShow,
-    } = useContext(ShopContext)
-
+    const order = useSelector(state => state.shop.order)
+    const dispatch = useDispatch()
     const totalCost = (order) =>{
         let cost = 0;
         order.forEach(orderItem => {
@@ -19,7 +18,7 @@ const BasketList = (props) => {
         <li className="collection-header">
             <h4>Корзина
                 <span className="secondary-content">
-            <i className='material-icons' onClick={()=>{changeBasketShow()}}>close</i>
+            <i className='material-icons' onClick={()=>{dispatch(changeBasketShow())}}>close</i>
                 </span>
             </h4>
         </li>
