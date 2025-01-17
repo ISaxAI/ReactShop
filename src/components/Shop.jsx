@@ -1,73 +1,21 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {API_KEY, API_URL} from "../config";
 import {Preloader} from "./Preloader";
-import {GoodsList} from "./GoodsList";
 import {Cart} from "./Cart";
 import {BasketList} from "./BasketList";
 import Pagination from "./Pagination";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    setGoods
+} from "../shopSlice";
 
 function Shop() {
-    const [goods, setGoods] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [order, setOrder] = useState([])
-    const [isBasketShow, setBasketShow] = useState(false)
+    //const {goods, loading, setGoods, order, isBasketShow} = useContext(ShopContext)
+    const order = useSelector(state => state.shop.order)
+    const isBasketShow = useSelector(state => state.shop.isBasketShow)
+    const loading = useSelector(state => state.shop.loading)
+    const dispatch = useDispatch()
 
-    const addToBasket = (item) => {
-        const newOrderId = order.findIndex(orderId => orderId.offerId === item.offerId)
-        if (newOrderId > -1) {
-            const newOrder = order.map((orderItem, index) => {
-                if (index === newOrderId) {
-                    return {
-                        ...orderItem,
-                        quantity: orderItem.quantity + 1,
-                    };
-                } else {
-                    return orderItem;
-                }
-            });
-            setOrder(newOrder);
-        } else {
-            const newItem = {
-                ...item,
-                quantity: 1
-            }
-            setOrder([...order, newItem])
-        }
-    }
-    const removeFromBasket = itemId => {
-        const newOrder = order.filter(el => el.offerId !== itemId);
-        setOrder(newOrder);
-    };
-    const changeBasketShow = () => {
-        setBasketShow(!isBasketShow)
-    }
-    const incrementOrderItem = (itemId) => {
-        const newOrder = order.map((orderItem, index) => {
-            if (orderItem.offerId === itemId) {
-                return {
-                    ...orderItem,
-                    quantity: orderItem.quantity + 1
-                }
-            } else {
-                return orderItem
-            }
-        })
-        setOrder(newOrder)
-    }
-    const decrementOrderItem = (itemId) => {
-        const newOrder = order.map((orderItem, index) => {
-            if (orderItem.offerId === itemId) {
-                const newQuantity = orderItem.quantity - 1;
-                return {
-                    ...orderItem,
-                    quantity: newQuantity >= 1 ? newQuantity : 0
-                }
-            } else {
-                return orderItem
-            }
-        })
-        setOrder(newOrder)
-    }
     useEffect(function getGoods() {
         fetch(API_URL, {
             headers: {
@@ -76,24 +24,18 @@ function Shop() {
         })
             .then(response => response.json())
             .then((data) => {
-                data.shop && setGoods(data.shop)
-                setLoading(false)
+                dispatch(setGoods(data.shop))
             })
     }, []);
+
     return <main className='container content'>
-        <Cart quantity={order.length} changeBasketShow={changeBasketShow}/>
+        <Cart quantity={order.length}/>
         {isBasketShow ?
-            <BasketList order={order}
-                        changeBasketShow={changeBasketShow}
-                        removeFromBasket={removeFromBasket}
-                        incrementOrderItem={incrementOrderItem}
-                        decrementOrderItem={decrementOrderItem}
-            /> : null}
+            <BasketList /> : null}
         {
-            loading ? <Preloader/> : <Pagination goods={goods} itemsPerPage={10} addToBasket={addToBasket}/>
+            loading ? <Preloader/> : <Pagination  itemsPerPage={10} />
         }
 
     </main>
 }
-
 export {Shop};

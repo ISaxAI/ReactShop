@@ -1,12 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {GoodsList} from "./GoodsList";
+import {useSelector} from "react-redux";
 
 const Pagination = (props) => {
-    const {
-        goods,
-        itemsPerPage,
-        addToBasket
-    } = props
+    const {itemsPerPage} = props
+    const goods = useSelector(state => state.shop.goods)
     const [currentPage, setCurrentPage] = useState(1);
 
     const totalPages = Math.ceil(goods.length / itemsPerPage);
@@ -20,7 +18,7 @@ const Pagination = (props) => {
 
     return (
         <div>
-            <GoodsList goods={currentGoods} addToBasket={addToBasket}/>
+            <GoodsList goods={currentGoods}/>
             <ul className="pagination">
                 <li>
                     <a>

@@ -7,7 +7,7 @@ function App() {
     return (
         <>
             <Header/>
-            <Shop />
+                <Shop />
             <Footer/>
         </>
     );

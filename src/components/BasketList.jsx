@@ -1,13 +1,10 @@
 import {BasketItem} from "./BasketItem";
+import {useDispatch, useSelector} from "react-redux";
+import {changeBasketShow} from "../shopSlice";
 
 const BasketList = (props) => {
-    const {
-        order = [],
-        changeBasketShow = Function.prototype,
-        removeFromBasket = Function.prototype,
-        incrementOrderItem = Function.prototype,
-        decrementOrderItem =Function.prototype
-    } = props
+    const order = useSelector(state => state.shop.order)
+    const dispatch = useDispatch()
     const totalCost = (order) =>{
         let cost = 0;
         order.forEach(orderItem => {
@@ -19,17 +16,17 @@ const BasketList = (props) => {
         <li className="collection-header">
             <h4>Корзина
                 <span className="secondary-content">
-            <i className='material-icons' onClick={()=>{changeBasketShow()}}>close</i>
+            <i className='material-icons' onClick={()=>{dispatch(changeBasketShow())}}>close</i>
                 </span>
             </h4>
         </li>
         {
             order.length ? order.map(item => (
-                    <BasketItem key={item.offerId}
-                                removeFromBasket={removeFromBasket}
-                                incrementOrderItem={incrementOrderItem}
-                                decrementOrderItem={decrementOrderItem}
-                                {...item}
+                    <BasketItem key={item.id}
+                                offerId={item.id}
+                                displayName={item.displayName}
+                                quantity={item.quantity}
+                                regularPrice={item.regularPrice}
                     />
                 )
             ) : <li className="collection-item ">Корзина пуста</li>
