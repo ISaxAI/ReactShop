@@ -4,7 +4,6 @@ import {useSelector} from "react-redux";
 
 const Pagination = (props) => {
     const {itemsPerPage} = props
-    //const {goods} = useContext(ShopContext)
     const goods = useSelector(state => state.shop.goods)
     const [currentPage, setCurrentPage] = useState(1);
 
