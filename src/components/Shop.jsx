@@ -1,10 +1,9 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect} from "react";
 import {API_KEY, API_URL} from "../config";
 import {Preloader} from "./Preloader";
 import {Cart} from "./Cart";
 import {BasketList} from "./BasketList";
 import Pagination from "./Pagination";
-import {ShopContext} from "../context";
 import {useDispatch, useSelector} from "react-redux";
 import {
     setGoods

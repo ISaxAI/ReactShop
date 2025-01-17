@@ -1,6 +1,4 @@
 import {BasketItem} from "./BasketItem";
-import {useContext} from "react";
-import {ShopContext} from "../context";
 import {useDispatch, useSelector} from "react-redux";
 import {changeBasketShow} from "../shopSlice";
 
@@ -24,8 +22,11 @@ const BasketList = (props) => {
         </li>
         {
             order.length ? order.map(item => (
-                    <BasketItem key={item.offerId}
-                                {...item}
+                    <BasketItem key={item.id}
+                                offerId={item.id}
+                                displayName={item.displayName}
+                                quantity={item.quantity}
+                                regularPrice={item.regularPrice}
                     />
                 )
             ) : <li className="collection-item ">Корзина пуста</li>

@@ -1,7 +1,4 @@
-import {useContext} from "react";
-import {ShopContext} from "../context";
 import {useDispatch, useSelector} from "react-redux";
-import {store} from "../store";
 import {changeBasketShow} from "../shopSlice";
 
 function Cart(props){

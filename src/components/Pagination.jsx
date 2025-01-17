@@ -1,6 +1,5 @@
 import React, {useContext, useState} from "react";
 import {GoodsList} from "./GoodsList";
-import {ShopContext} from "../context";
 import {useSelector} from "react-redux";
 
 const Pagination = (props) => {
