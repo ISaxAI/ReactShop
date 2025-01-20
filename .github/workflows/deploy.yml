@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - master
+env:
+  REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
