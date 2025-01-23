@@ -1,3 +1,6 @@
+$white: #FFFFFFFF;
+$color-primary: #1f87ff;
+$color-secondary: #90CAF9;
 nav {
   padding: 0 1rem;
 }
@@ -17,7 +20,6 @@ nav {
   display: flex;
   flex-direction: column;
 }
-
 .card-content {
   flex-grow: 1;
 }
@@ -26,27 +28,34 @@ nav {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+
   cursor: pointer;
   z-index: 5;
   padding: 1rem;
 }
-
 @media (min-width: 767px) {
   .cart {
     top: 5rem;
     bottom: unset;
   }
 }
+
 .basket-list {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
-  background-color: white;
+
+  background-color: $white;
   width: 50rem;
   max-width: 95%;
-  box-shadow: inset -1px 3px 8px 5px #1f87ff, 2px 5px 16px 0px #0b325e, 5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+  box-shadow:
+          inset -1px 3px 8px 5px $color-primary,
+          2px 5px 16px 0px #0b325e,
+          5px 5px 15px 5px rgba(0, 0, 0, 0);
+
   animation: show 500ms ease-in-out;
 }
 
@@ -55,9 +64,8 @@ nav {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  color: white;
+  color: $white;
 }
-
 .basket-delete {
   cursor: pointer;
 }
@@ -72,10 +80,11 @@ nav {
     opacity: 1;
   }
 }
+
 .basket-quantity {
   cursor: pointer;
   vertical-align: middle;
-  color: #1f87ff;
+  color: $color-primary;
 }
 
 #toast-container {
@@ -94,15 +103,11 @@ nav {
   }
 }
 .secondary-content {
-  color: #90CAF9;
+  color: $color-secondary;
 }
-
-.material-icons {
+.material-icons{
   cursor: pointer;
 }
-
 button:active {
-  background-color: #90CAF9;
+  background-color: $color-secondary;
 }
-
-/*# sourceMappingURL=index.css.map */
