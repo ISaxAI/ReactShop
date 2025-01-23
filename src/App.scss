@@ -1,3 +1,10 @@
+$background-color: #282c34;
+$white: #FFFFFFFF;
+@mixin flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .App {
   text-align: center;
 }
@@ -12,15 +19,14 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 .App-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #282c34;
+  @include flex-center;
+  background-color: $background-color;
   min-height: 100vh;
   flex-direction: column;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: $white;
 }
 
 .App-link {
@@ -35,5 +41,3 @@
     transform: rotate(360deg);
   }
 }
-
-/*# sourceMappingURL=App.css.map */
